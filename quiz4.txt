@@ -1,0 +1,519 @@
+ 
+
+
+Q1
+? ? 
+
+Consider the following code and determine the correct code for calling this function 
+
+ CREATE OR REPLACE FUNCTION addNumbers(num1 in out number, num2 number) RETURN
+ number as
+ BEGIN
+ num1:=num1+num2;
+ RETURN num1;
+ END;
+
+ 
+ Multiple Choice - This may have multiple correct answers.Select required answer(s) from the options list. 
+        
+ 
+ 
+
+ 
+ ? 
+
+
+BEGIN
+ addNumbers(10,20);
+ END;
+
+ 
+ ? 
+
+
+DECLARE 
+ ans number;
+ BEGIN
+ ans:=addNumbers(10,20);
+ END;
+
+ 
+ ? 
+
+declare----------------------------------ANSWER
+ ans number;
+ num1 number:=10;
+ begin
+ ans:=addNumbers(num1,20);
+ end;
+ /
+
+ 
+ ? 
+
+
+declare----------------------------------ANSWER
+ ans number;
+ num1 number:=10;
+ num2 number:=20;
+ begin
+ ans:=addNumbers(num1,num2);
+ e
+ 
+
+
+      
+  
+
+
+Q2
+? ? 
+
+See the below snippet
+
+ CREATE OR REPLACE PROCEDURE Many_Params (
+ mesg1 IN     VARCHAR2,
+ mesg2 OUT    VARCHAR2,
+ mesg3 IN OUT VARCHAR2) IS
+ BEGIN
+   mesg2 := mesg1 || 'Parameter As The OUT';
+   mesg3 := mesg3 || 'Returned';
+ END Many_Params;
+ /
+ DECLARE
+  iparm  VARCHAR2(50) := 'This is the IN ';
+  oparm  VARCHAR2(50);
+  ioparm VARCHAR2(50) := 'And This is the IN OUT '; 
+ BEGIN
+   many_params(iparm, oparm, ioparm);
+   dbms_output.put_line(oparm || ' .’|| ioparm);
+ END;
+ /
+ What is the output of the program?
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+This is the IN Parameter As The OUT. And This is the IN OUT 
+
+ 
+ ? 
+
+
+Parameter As The OUT. And This is the IN OUT
+
+ 
+ ? 
+
+
+This is the IN Parameter As The OUT. And This is the IN OUT Returned----------------------------------ANSWER
+
+ 
+ ? 
+
+
+This is the IN Parameter As The OUT Returned
+ 
+
+
+      
+  
+
+
+Q3
+? ? 
+
+Observe the following code and predict the ouput 
+
+ CREATE OR REPLACE PROCEDURE PROC1(num1 NUMBER, num2 NUMBER) AS
+ result NUMBER;
+ BEGIN
+ result:=num1+num2;
+ DBMS_OUTPUT.PUT_LINE(result);
+ RETURN result;
+ END;
+ /
+
+ 
+ Multiple Choice - This may have multiple correct answers.Select required answer(s) from the options list. 
+        
+ 
+ 
+
+ 
+ ? 
+
+
+Compilation error as RETURN statement cannot contain an expression----------------------------------ANSWER
+
+ 
+ ? 
+
+
+Compilation succeeds and the value in result variable will be displayed
+
+ 
+ ? 
+
+
+Compilation will succeed if only RETURN is written instead of RETURN result;----------------------------------ANSWER
+
+ 
+ ? 
+
+
+None of the above
+ 
+
+
+      
+  
+
+
+Q4
+? ? 
+
+Which of the statements are true about the following pl/sql block 
+    DECLARE 
+     V_STAFF_NO  NUMBER  := 600080'; 
+     V_EMP_NAME VARCHAR2(10); 
+
+  BEGIN 
+       SELECT staff_name  FROM STAFF_MASTER  WHERE STAFF_CODE = V_STAFF_NO ;
+       DBMS_OUTPUT.PUT_LINE('Employee name is ' || V_EMP_NAME); 
+
+ EXCEPTION 
+
+ WHEN NO_DATA_FOUND THEN 
+     DBMS_OUTPUT.PUT_LINE('No such employee: ' || Emp_number); 
+ WHEN Others
+     DBMS_OUTPUT.PUT_LINE('some exception'); 
+
+ END;
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+Will show compilation error because into clause is missing----------------------------------ANSWER
+
+ 
+ ? 
+
+
+Will print some exception message
+
+ 
+ ? 
+
+
+Will run successfully
+
+ 
+ ? 
+
+
+Will show a compilation error because V_EMP_NAME is not initialized
+ 
+
+
+      
+  
+
+
+Q5
+? ? 
+
+Assume that table ERRORS is having following structure:
+
+ Name             Null?          Type
+ -----------------------------------
+ Errorno                            Number
+ Errormess                        Char(100)
+
+ Identify the erroneous line in the given code snippet. (Refer the line numbers which are given in the snippet.)
+
+  1DECLARE
+  2 Err_Num NUMBER ;
+  3 Err_Msg CHAR(100);
+  4 BEGIN
+  -------
+ ------
+ 5 EXCEPTION
+ ----------
+ -------
+  6 WHEN OTHERS THEN
+  7 INSERT INTO errors VALUES (SQLCODE, SQLERRM);
+  8 END;
+ /
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+line 2
+
+ 
+ ? 
+
+
+line 6
+
+ 
+ ? 
+
+
+line 7 ----------------------------------ANSWER
+
+ 
+ ? 
+
+
+no error
+ 
+
+
+      
+  
+
+
+Q6
+? ? 
+
+Observe the following code and predict the ouput 
+
+ CREATE OR REPLACE PROCEDURE PROC1(num1 NUMBER, num2 NUMBER) AS
+ BEGIN
+ num1:=num1+num2;
+ DBMS_OUTPUT.PUT_LINE(num1);
+ RETURN;
+ END;
+ /
+
+ 
+ Multiple Choice - This may have multiple correct answers.Select required answer(s) from the options list. 
+        
+ 
+ 
+
+ 
+ ? 
+
+
+Compilation error : num1 cannot be used as assignment target----------------------------------ANSWER
+
+ 
+ ? 
+
+
+Compilation succeeds if num1 is declared as OUT parameter----------------------------------ANSWER
+
+ 
+ ? 
+
+
+Compilation succeeds if num1 is declared as IN parameter
+
+ 
+ ? 
+
+
+No compilation error
+ 
+
+
+      
+  
+
+
+Q7
+? ? 
+
+See the below snippet.
+ CREATE PROCEDURE Create_Stud (rollno IN NUMBER, sname IN varchar2 DEFAULT 'aaa’) IS
+ BEGIN
+ INSERT INTO stus (rollnumber, studname)
+ VALUES (rollno, sname);
+ END;
+  
+ What will be the output if we call procedure as Create_Stud (10,’AMIT’);
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+Procedure call will fail results in error 
+
+ 
+ ? 
+
+
+rollno will be 10 and sname will be ‘aaa’
+
+ 
+ ? 
+
+
+Error: Default Keyword is missing in procedure call
+
+ 
+ ? 
+
+
+rollno will be 10 and sname will be ‘AMIT’ ----------------------------------ANSWER
+ 
+
+
+      
+  
+
+
+Q8
+? ? 
+
+If there is a procedure called addNumbers already existing, what will be the output of the following code?
+
+ CREATE OR REPLACE FUNCTION addNumbers(num1 in out number, num2 number) RETURN
+ number as
+ BEGIN
+ num1:=num1+num2;
+ RETURN num1;
+ END;
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+The procedure will get overwritten by this function
+
+ 
+ ? 
+
+
+There will be a procedure as well as a function with the same name, addNumbers
+
+ 
+ ? 
+
+
+Compilation error.  name is already used by an existing object----------------------------------ANSWER
+
+ 
+ ? 
+
+
+None of the above
+ 
+
+
+      
+  
+
+
+Q9
+? ? 
+
+PL/SQL raises an exception, in which TWO of the following cases
+
+ 
+ Multiple Choice - This may have multiple correct answers.Select required answer(s) from the options list. 
+        
+ 
+ 
+
+ 
+ ? 
+
+
+When a SELECT statement returns no rows ----------------------------------ANSWER
+
+ 
+ ? 
+
+
+When a SELECT statement returns more than one row ----------------------------------ANSWER
+
+ 
+ ? 
+
+
+When the datatypes of SELECT clause and INTO clause do not match 
+
+ 
+ ? 
+
+
+When INTO statement is missing in the SELECT statement 
+ 
+
+
+      
+  
+
+
+Q10
+? ? 
+
+If SELECT INTO statement does not return any row then the following exception 
+ would be raised
+
+
+ Single Choice - Select one correct answer from theoptions list. 
+         
+ 
+ 
+
+ 
+ ? 
+
+
+TOO_MANY_ROWS 
+
+ 
+ ? 
+
+
+NO_DATA_FOUND----------------------------------ANSWER
+
+ 
+ ? 
+
+
+VALUE_ERROR
+
+ 
+ ? 
+
+
+INVALID_CURSOR
